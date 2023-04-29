@@ -1,0 +1,78 @@
+﻿@model StackTak.Models.SwitchCreateViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Add Device</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        <label>
+            @Html.RadioButtonFor(m => m.TableType, StackTak.Models.SwitchTableType.Access, new {@checked = true })
+            Access Switch
+        </label>
+        <label>
+            @Html.RadioButtonFor(m => m.TableType, StackTak.Models.SwitchTableType.Aggregation)
+            Aggregation Switch
+        </label>
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.DeviceIPAddress)
+        @Html.TextBoxFor(m => m.DeviceIPAddress)
+        @Html.ValidationMessageFor(m => m.DeviceIPAddress)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.NetworkMask)
+        @Html.TextBoxFor(m => m.NetworkMask)
+        @Html.ValidationMessageFor(m => m.NetworkMask)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.IpGateway)
+        @Html.TextBoxFor(m => m.IpGateway)
+        @Html.ValidationMessageFor(m => m.IpGateway)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Manufacturer)
+        @Html.TextBoxFor(m => m.Manufacturer)
+        @Html.ValidationMessageFor(m => m.Manufacturer)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.DeviceModel)
+        @Html.TextBoxFor(m => m.DeviceModel)
+        @Html.ValidationMessageFor(m => m.DeviceModel)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.City)
+        @Html.TextBoxFor(m => m.City)
+        @Html.ValidationMessageFor(m => m.City)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Street)
+        @Html.TextBoxFor(m => m.Street)
+        @Html.ValidationMessageFor(m => m.Street)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Building)
+        @Html.TextBoxFor(m => m.Building)
+        @Html.ValidationMessageFor(m => m.Building)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Description)
+        @Html.TextBoxFor(m => m.Description)
+        @Html.ValidationMessageFor(m => m.Description)
+    </div>
+
+    <button type="submit">Create Switch</button>
+
+
+}
