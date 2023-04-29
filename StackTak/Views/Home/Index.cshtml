@@ -1,51 +1,54 @@
 ﻿@model StackTak.Models.SearchViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Search";
 }
 
 <h2>Index</h2>
 <div>
-    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
-    {
-        <input type="text" name="ipAddress" placeholder="Enter IP address...">
-        <button type="submit">Search</button>
-    }
+    <div class="search_form">
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+        {
+            <input type="text" name="ipAddress" placeholder="Enter IP address...">
+            <button class="btn btn-primary"  type="submit">Search</button>
+        }
 
-    @if (Model != null)
-    {
-        <h3>Results:</h3>
-        <table class="table table-striped">
-            <tr>
-                <th>IP Address</th>
-                <th>Subnet Mask</th>
-                <th>IP Gateway</th>
-                <th>Description</th>
-                <th>Manufacturer</th>
-                <th>Model</th>
-                <th>City</th>
-                <th>Street</th>
-                <th>Building</th>
-             
-
-            </tr>
-            <tr>
-                <td>@Model.IPAddress</td>
-                <td>@Model.SubnetMask</td>
-                <td>@Model.Gateway</td>
-                <td>@Model.Description</td>
-                <td>@Model.Manufacturer</td>
-                <td>@Model.DeviceModel</td>
-                <td>@Model.City</td>
-                <td>@Model.Street</td>
-                <td>@Model.Building</td>
-                
-
-            </tr>
-        </table>
-    }
+    </div>
+    <div class="main_page_output">
+        @if (Model != null)
+        {
+            <h3>Results:</h3>
+            <table class="table table-striped">
+                <tr>
+                    <th>IP Address</th>
+                    <th>Subnet Mask</th>
+                    <th>IP Gateway</th>
+                    <th>Description</th>
+                    <th>Manufacturer</th>
+                    <th>Model</th>
+                    <th>City</th>
+                    <th>Street</th>
+                    <th>Building</th>
 
 
+                </tr>
+                <tr>
+                    <td>@Model.IPAddress</td>
+                    <td>@Model.SubnetMask</td>
+                    <td>@Model.Gateway</td>
+                    <td>@Model.Description</td>
+                    <td>@Model.Manufacturer</td>
+                    <td>@Model.DeviceModel</td>
+                    <td>@Model.City</td>
+                    <td>@Model.Street</td>
+                    <td>@Model.Building</td>
+
+
+                </tr>
+            </table>
+        }
+
+    </div>
 
 </div>
 
