@@ -1,0 +1,86 @@
+﻿@model StackTak.Models.SwitchCreateViewModel
+
+@{
+    ViewBag.Title = "Create Device";
+}
+
+<h2>Add Device</h2>
+<h3>
+
+</h3>
+
+@using (Html.BeginForm())
+{
+    <div class="create_form_radiobtn">
+        <label>
+            @Html.RadioButtonFor(m => m.TableType, StackTak.Models.SwitchTableType.Access, new { @id = "radioAccessBtn", @checked = true, @onclick = "toggleGatwayInputForm()" })
+            Access Switch
+        </label>
+        <label>
+            @Html.RadioButtonFor(m => m.TableType, StackTak.Models.SwitchTableType.Aggregation, new {@id= "radioAggregationBtn", @onclick= "toggleGatwayInputForm()" })
+            Aggregation Switch
+        </label>
+    </div>
+    <div class="create_input_block">
+        <div class="input_block_one">
+            <div class="create_forms_input">
+                @Html.LabelFor(m => m.DeviceIPAddress)
+                @Html.TextBoxFor(m => m.DeviceIPAddress)
+                @Html.ValidationMessageFor(m => m.DeviceIPAddress)
+            </div>
+
+            <div class="create_forms_input">
+                @Html.LabelFor(m => m.NetworkMask)
+                @Html.TextBoxFor(m => m.NetworkMask)
+                @Html.ValidationMessageFor(m => m.NetworkMask)
+            </div>
+
+            <div id="gateway_form" class="create_forms_input">
+                @Html.LabelFor(m => m.IpGateway)
+                @Html.TextBoxFor(m => m.IpGateway, new { @Value = "0" })
+                @Html.ValidationMessageFor(m => m.IpGateway)
+            </div>
+
+            <div class="create_forms_input">
+                @Html.LabelFor(m => m.Manufacturer)
+                @Html.TextBoxFor(m => m.Manufacturer)
+                @Html.ValidationMessageFor(m => m.Manufacturer)
+            </div>
+
+            <div class="create_forms_input">
+                @Html.LabelFor(m => m.DeviceModel)
+                @Html.TextBoxFor(m => m.DeviceModel)
+                @Html.ValidationMessageFor(m => m.DeviceModel)
+            </div>
+        </div>
+
+        <div class="input_block_two">
+            <div class="create_forms_input">
+                @Html.LabelFor(m => m.City)
+                @Html.TextBoxFor(m => m.City)
+                @Html.ValidationMessageFor(m => m.City)
+            </div>
+
+            <div class="create_forms_input">
+                @Html.LabelFor(m => m.Street)
+                @Html.TextBoxFor(m => m.Street)
+                @Html.ValidationMessageFor(m => m.Street)
+            </div>
+
+            <div class="create_forms_input">
+                @Html.LabelFor(m => m.Building)
+                @Html.TextBoxFor(m => m.Building)
+                @Html.ValidationMessageFor(m => m.Building)
+            </div>
+
+            <div class="create_forms_input">
+                @Html.LabelFor(m => m.Description)
+                @Html.TextBoxFor(m => m.Description)
+                @Html.ValidationMessageFor(m => m.Description)
+            </div>
+
+            <button class="create_btn btn btn-primary mt-4" type="submit">Create Switch</button>
+
+        </div>
+    </div>
+}

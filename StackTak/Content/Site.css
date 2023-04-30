@@ -6,23 +6,10 @@
     border: 0;
     box-sizing: border-box;
 }
-
-    *, *:before, *:after {
-        box-sizing: border-box;
-    }
-
-        *:focus, *:active {
-            outline: none;
-        }
-
-a:focus, a:active {
-    outline: none;
-}
-
-nav, footer, header, aside {
-    display: block;
-}
-
+    *, *:before, *:after {box-sizing: border-box}
+        *:focus, *:active {outline: none}
+a:focus, a:active {outline: none}
+nav, footer, header, aside {display: block}
 html, body {
     height: 100%;
     width: 100%;
@@ -31,58 +18,29 @@ html, body {
     font-size: 14px;
     
 }
-
-input, button, textarea {
-    display: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
+input, button, textarea {display: inherit}
+button {cursor: pointer;}
 a, a:visited {
     text-decoration: none;
     display: inline-block;
 }
-
-    a:hover {
-        text-decoration: none;
-    }
-
-ul li {
-    list-style: none;
-}
-
-img {
-    vertical-align: top;
-}
+    a:hover {text-decoration: none}
+ul li {list-style: none}
+img {vertical-align: top}
 body {
     padding-top: 50px;
     padding-bottom: 20px;
     background: #d8dceb;
     font-family: 'Poppins', sans-serif;
 }
-
-/* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
-
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
-/* Set width on the form input elements since they're 100% wide by default */
+.dl-horizontal dt {white-space: normal}
 input,
 select,
-textarea {
-    max-width: 280px;
-}
-
+textarea {max-width: 280px}
 .navbar-inverse .navbar-toggle:hover,
 .navbar-inverse .navbar-toggle:focus {
     background-color: #777;
@@ -90,9 +48,7 @@ textarea {
 }
 /*===============================================================================*/
 
-.header {
-    background: #08141F;
-}
+.header {background: #08141F;}
 .logo_img{
     margin-top: 10px;
     margin-right: 30px;
@@ -109,6 +65,15 @@ textarea {
     padding-left: 4px;
     font-size: 16px;
 }
+.create_form_radiobtn {margin-bottom: 10px}
+.create_input_block {
+    display:flex;
+    justify-content:left;
+}
+.input_block_one {
+    margin-right: 40px;
+
+}
 
 .create_form_radiobtn label,
 .create_forms_input label {
@@ -117,9 +82,7 @@ textarea {
     font-size: 14px;
     font-weight: 100;
 }
-.create_forms_input label {
-    margin-top: 5px; 
-}
+.create_forms_input label {margin-bottom: 5px}
 .create_forms_input input {
     height: 35px;
     width: 250px;
@@ -128,8 +91,35 @@ textarea {
     border-radius: 4px;
     padding-left: 4px;
     font-size: 16px;
+    margin-bottom: 5px;
 }
-.create_forms_output button {
-    margin-top: 10px;
+.create_btn {margin-top: 20px}
 
+.search_address_block {
+    margin-top: 20px;
+}
+.search_address_form input {
+    height: 35px;
+    width: 250px;
+    border: 1px solid grey;
+    background: #FFF;
+    border-radius: 4px;
+    padding-left: 4px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.search_btn {margin-top: 20px}
+/*================================================================*/
+@media(max-width: 580px) {
+    .create_input_block {
+        flex-direction:column;
+        align-items: center;
+    }
+    .input_block_one {
+        margin-right: 0;
+    }
+    .create_form_radiobtn {
+       margin: 0 auto;
+       margin-bottom: 20px;
+    }
 }

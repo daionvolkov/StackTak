@@ -20,6 +20,6 @@ namespace StackTak.Models
         public string Description { get; set; }
         public int Postal_Address_ID { get; set; }
 
-
+        public Postal_Address Postal_Address { get; set; }
     }
 }

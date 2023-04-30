@@ -11,9 +11,8 @@ namespace StackTak.Models
     [Table("Aggregation_Switch")]
     public class Aggregation_Switch
     {
-        public int ID { get; set; }
-        
         [Key]
+        public int ID { get; set; }
         public long Device_IP_Address { get; set; }
         public int Network_Mask { get; set; }
         public long IP_Gateway { get; set; }

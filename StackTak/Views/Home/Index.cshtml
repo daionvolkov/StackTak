@@ -22,7 +22,11 @@
                 <tr>
                     <th>IP Address</th>
                     <th>Subnet Mask</th>
+                    @if (@Model.Gateway != "0")
+                    {
                     <th>IP Gateway</th>
+                    }
+                    <th>Switch Type</th>
                     <th>Description</th>
                     <th>Manufacturer</th>
                     <th>Model</th>
@@ -35,7 +39,11 @@
                 <tr>
                     <td>@Model.IPAddress</td>
                     <td>@Model.SubnetMask</td>
-                    <td>@Model.Gateway</td>
+                    @if (@Model.Gateway != "0") 
+                    {    
+                        <td>@Model.Gateway</td>
+                    }
+                    <td>@Model.SwitchType</td>
                     <td>@Model.Description</td>
                     <td>@Model.Manufacturer</td>
                     <td>@Model.DeviceModel</td>

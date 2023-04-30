@@ -1,0 +1,50 @@
+﻿@model List<StackTak.Models.SearchViewModel>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Address Search</h2>
+</br>
+<form asp-controller="AccessSwitch" asp-action="Index" method="post" class="search_address_block">
+    <div class="search_address_form">
+        <input type="text" id="city" name="city" placeholder="City">
+    </div>
+    <div class="search_address_form">
+        <input type="text" id="street" name="street" placeholder="Street">
+    </div>
+    <div class="search_address_form">
+        <input type="text" id="building" name="building" placeholder="Building">
+    </div>
+    <button class="search_btn btn btn-primary" type="submit">Search</button>
+</form>
+
+@if (Model != null)
+{
+    <h4>Results for @ViewBag.City  @ViewBag.Street  @ViewBag.Building</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Device IP Address</th>
+                <th>Network Mask</th>
+                <th>IP Gateway ID</th>
+                <th>Manufacturer</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var accessSwitch in Model)
+            {
+                <tr>
+                    <td>@accessSwitch.IPAddress</td>
+                    <td>@accessSwitch.SubnetMask</td>
+                    <td>@accessSwitch.Gateway</td>
+                    <td>@accessSwitch.Manufacturer</td>
+                    <td>@accessSwitch.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+

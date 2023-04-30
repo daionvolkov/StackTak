@@ -5,6 +5,11 @@ using System.Web;
 
 namespace StackTak.Models
 {
+    public enum SwitchTypeEnum
+    {
+        Access,
+        Aggregation
+    }
     public class SearchViewModel
     {
         public string IPAddress { get; set; }
@@ -16,5 +21,6 @@ namespace StackTak.Models
         public string City { get; set; }
         public string Street { get; set; }
         public string Building { get; set; }
+        public SwitchTypeEnum SwitchType { get; set;}
     }
 }
