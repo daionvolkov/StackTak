@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Web;
 using System.Web.Mvc;
 
@@ -109,6 +110,23 @@ namespace StackTak.Controllers
 
             return string.Join(".", binaryOctets.Select(octet => Convert.ToInt32(octet, 2).ToString()));
         }
+
+        /*public ActionResult PingSwitch(string ipAddress)
+        {
+            Ping ping = new Ping();
+            PingReply reply = ping.Send(ipAddress);
+
+            if (reply.Status == IPStatus.Success)
+            {
+                ViewBag.Message = "Switch is online";
+            }
+            else
+            {
+                ViewBag.Message = "Switch is offline";
+            }
+
+            return View();
+        }*/
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

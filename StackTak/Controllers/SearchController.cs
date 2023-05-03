@@ -6,12 +6,12 @@ using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace StackTak.Controllers
 {
     public class SearchController : Controller
     {
-        // GET: Search
         private readonly InventoryDbContext db = new InventoryDbContext();
 
         public SearchController()
@@ -19,56 +19,66 @@ namespace StackTak.Controllers
             db = new InventoryDbContext();
         }
 
-        [HttpGet]
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+          [HttpGet]
+            public ActionResult Index()
+            {
+             return View();
+            }
+     
         [HttpPost]
         public ActionResult Index(string city, string street, string building) {
 
-           var res = db.Access_Switches.ToList()
-             .Select(x => new { ipAddressString = LongToIpAddress(x.Device_IP_Address)});
-             
-            //TODO
+            var searchResults = new List<SearchViewModel>();
 
-            var accessSwitches = db.Access_Switches
-             .Where(a => a.Postal_Address.City == city
-                 || a.Postal_Address.Street == street
-                 || a.Postal_Address.Building == building)
-             .Select(a => new SearchViewModel
-             {
-                 IPAddress = res.ToString(),
-                 //IPAddress = "192.168.1.1",
-                 SubnetMask = a.Network_Mask,
-                 Gateway = a.IP_Gateway_ID.ToString(),
-                 Manufacturer = db.Equipment_Manufacturers
-                     .Where(m => m.Id == a.Manufacturer_ID)
-                     .Select(m => m.Hardware_Manufacturer + " " + m.Hardware_Model)
-                     .FirstOrDefault(),
-                 Description = a.Description
-             })
-             .ToList();
+            var query = from accessSwitch in db.Access_Switches
+                        join aggregationSwitch in db.Aggregation_Switches on accessSwitch.IP_Gateway_ID equals aggregationSwitch.ID
+                        join postalAddress in db.Postal_Addresses on accessSwitch.Postal_Address_ID equals postalAddress.Id
+                        join equipment in db.Equipment_Manufacturers on accessSwitch.Manufacturer_ID equals equipment.Id
+                        where (city == null || postalAddress.City.Contains(city))
+                            && (street == null || postalAddress.Street.Contains(street))
+                            && (building == null || postalAddress.Building.Contains(building))
+                        select new
+                        {
+                            IpAddress = accessSwitch.Device_IP_Address,
+                            SubnetMask = accessSwitch.Network_Mask,
+                            Gateway = aggregationSwitch.Device_IP_Address,
+                            Description = accessSwitch.Description,
+                            Manufacturer = equipment.Hardware_Manufacturer,
+                            Model = equipment.Hardware_Model,
+                            City = postalAddress.City,
+                            Street = postalAddress.Street,
+                            Building = postalAddress.Building
+                        };
 
-            ViewBag.City = city;
-            ViewBag.Street = street;
-            ViewBag.Building = building;
-
-            return View(accessSwitches);
+            foreach (var result in query)
+            {
+                searchResults.Add(new SearchViewModel
+                {
+                    IPAddress = ConvertIpAddress(result.IpAddress),
+                    SubnetMask = result.SubnetMask,
+                    Gateway = ConvertIpAddress(result.Gateway),
+                    Description = result.Description,
+                    Manufacturer = result.Manufacturer,
+                    DeviceModel = result.Model,
+                    City = result.City,
+                    Street = result.Street,
+                    Building = result.Building
+                });
+            }
+            return View(searchResults);
         }
 
-        public static string LongToIpAddress(long ip)
+        private static string ConvertIpAddress(long ipAddress)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(ip >> 24 & 0xFF);
-            sb.Append(".");
-            sb.Append(ip >> 16 & 0xFF);
-            sb.Append(".");
-            sb.Append(ip >> 8 & 0xFF);
-            sb.Append(".");
-            sb.Append(ip & 0xFF);
-            return sb.ToString();
+            var octets = new byte[4];
+
+            octets[0] = (byte)(ipAddress >> 24);
+            octets[1] = (byte)(ipAddress >> 16);
+            octets[2] = (byte)(ipAddress >> 8);
+            octets[3] = (byte)(ipAddress);
+
+            return $"{octets[0]}.{octets[1]}.{octets[2]}.{octets[3]}";
         }
+
     }
 }
