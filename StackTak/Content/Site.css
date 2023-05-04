@@ -123,3 +123,12 @@ textarea {max-width: 280px}
        margin-bottom: 20px;
     }
 }
+
+/*==============================*/
+.is_available {
+width: 20px;
+height: 20px;
+background-color: #FFF;
+display:block;
+border-radius: 5px;
+}

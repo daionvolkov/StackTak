@@ -49,9 +49,9 @@ namespace StackTak.Controllers
                         viewModel.IPAddress = ipAddress;
                         viewModel.SubnetMask = accessSwitch.Network_Mask;
                         viewModel.Gateway = LongToIpAddress(aggregationSwitch.Device_IP_Address);
-                        viewModel.Description = accessSwitch.Description;
-                        viewModel.Manufacturer = manufacturer.Hardware_Manufacturer;
-                        viewModel.DeviceModel = manufacturer.Hardware_Model;
+                        //viewModel.Description = accessSwitch.Description;
+                        //viewModel.Manufacturer = manufacturer.Hardware_Manufacturer;
+                        //viewModel.DeviceModel = manufacturer.Hardware_Model;
                         viewModel.City = postAddress.City;
                         viewModel.Street = postAddress.Street;
                         viewModel.Building = postAddress.Building;
@@ -66,9 +66,9 @@ namespace StackTak.Controllers
                         viewModel.IPAddress = ipAddress;
                         viewModel.SubnetMask = aggregationSwitch.Network_Mask;
                         viewModel.Gateway = "0";
-                        viewModel.Description = aggregationSwitch.Description;
-                        viewModel.Manufacturer = manufacturer.Hardware_Manufacturer;
-                        viewModel.DeviceModel = manufacturer.Hardware_Model;
+                        //viewModel.Description = aggregationSwitch.Description;
+                        //viewModel.Manufacturer = manufacturer.Hardware_Manufacturer;
+                        //viewModel.DeviceModel = manufacturer.Hardware_Model;
                         viewModel.City = postAddress.City;
                         viewModel.Street = postAddress.Street;
                         viewModel.Building = postAddress.Building;
@@ -82,6 +82,66 @@ namespace StackTak.Controllers
             return View(viewModel);
             
         }
+
+        public ActionResult Details(string IPAddr)
+        {
+            bool isSwitchAccess = false;
+            bool isSwitchAggregation = false;
+
+            var viewModel = new SearchViewModel();
+            try
+            {
+                long ipAddressLong = IpAddressToLong(IPAddr);
+                isSwitchAccess = db.Access_Switches
+                        .Any(s => s.Device_IP_Address == ipAddressLong);
+
+                isSwitchAggregation = db.Aggregation_Switches
+                     .Any(s => s.Device_IP_Address == ipAddressLong);
+
+                if (isSwitchAccess)
+                {
+                    var accessSwitch = db.Access_Switches.FirstOrDefault(s => s.Device_IP_Address == ipAddressLong);
+                    var aggregationSwitch = db.Aggregation_Switches.FirstOrDefault(s => s.ID.Equals(accessSwitch.IP_Gateway_ID));
+                    var manufacturer = db.Equipment_Manufacturers.FirstOrDefault(s => s.Id.Equals(accessSwitch.Manufacturer_ID));
+                    var postAddress = db.Postal_Addresses.FirstOrDefault(s => s.Id.Equals(accessSwitch.Postal_Address_ID));
+
+                    viewModel.IPAddress = IPAddr;
+                    viewModel.SubnetMask = accessSwitch.Network_Mask;
+                    viewModel.Gateway = LongToIpAddress(aggregationSwitch.Device_IP_Address);
+                    viewModel.Description = accessSwitch.Description;
+                    viewModel.Manufacturer = manufacturer.Hardware_Manufacturer;
+                    viewModel.DeviceModel = manufacturer.Hardware_Model;
+                    viewModel.City = postAddress.City;
+                    viewModel.Street = postAddress.Street;
+                    viewModel.Building = postAddress.Building;
+                    viewModel.SwitchType = SwitchTypeEnum.Access;
+                }
+                else if (isSwitchAggregation)
+                {
+                    var aggregationSwitch = db.Aggregation_Switches.FirstOrDefault(s => s.Device_IP_Address == ipAddressLong);
+                    var manufacturer = db.Equipment_Manufacturers.FirstOrDefault(s => s.Id.Equals(aggregationSwitch.Manufacturer_ID));
+                    var postAddress = db.Postal_Addresses.FirstOrDefault(s => s.Id.Equals(aggregationSwitch.Postal_Address_ID));
+
+                    viewModel.IPAddress = IPAddr;
+                    viewModel.SubnetMask = aggregationSwitch.Network_Mask;
+                    viewModel.Gateway = "0";
+                    viewModel.Description = aggregationSwitch.Description;
+                    viewModel.Manufacturer = manufacturer.Hardware_Manufacturer;
+                    viewModel.DeviceModel = manufacturer.Hardware_Model;
+                    viewModel.City = postAddress.City;
+                    viewModel.Street = postAddress.Street;
+                    viewModel.Building = postAddress.Building;
+                    viewModel.SwitchType = SwitchTypeEnum.Aggregation;
+                }
+            }
+            catch
+            {
+                viewModel.IPAddress = "Not found";
+            }
+            return View(viewModel);
+        }
+
+
         public static long IpAddressToLong(string ipAddress)
         {
             IPAddress ip = IPAddress.Parse(ipAddress);
@@ -92,41 +152,28 @@ namespace StackTak.Controllers
             }
             return BitConverter.ToUInt32(bytes, 0);
         }
+
         public static string LongToIpAddress(long ip)
         {
             IPAddress ipAddress = IPAddress.Parse(ip.ToString());
             return ipAddress.ToString();
         }
-        public static string DecimalToBinaryDecimal(string decimalMask)
+        
+
+
+       /* public static string DecimalToBinary(int decimalNumber)
         {
-            int decimalValue = int.Parse(decimalMask);
-            string binaryValue = new string('1', decimalValue).PadRight(32, '0');
-            string[] binaryOctets = new string[1];
-
-            for (int i = 0; i < 4; i++)
+            int[] binaryNumber = new int;
+            int index = 0;
+            while (decimalNumber > 0)
             {
-                binaryOctets[i] = binaryValue.Substring(i * 8, 8);
+                binaryNumber[index++] = decimalNumber % 2;
+                decimalNumber = decimalNumber / 2;
             }
-
-            return string.Join(".", binaryOctets.Select(octet => Convert.ToInt32(octet, 2).ToString()));
-        }
-
-        /*public ActionResult PingSwitch(string ipAddress)
-        {
-            Ping ping = new Ping();
-            PingReply reply = ping.Send(ipAddress);
-
-            if (reply.Status == IPStatus.Success)
-            {
-                ViewBag.Message = "Switch is online";
-            }
-            else
-            {
-                ViewBag.Message = "Switch is offline";
-            }
-
-            return View();
+            Array.Reverse(binaryNumber, 0, index);
+            return string.Join(".", binaryNumber.Select(x => x.ToString()).ToArray());
         }*/
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

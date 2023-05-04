@@ -12,3 +12,35 @@ function toggleGatwayInputForm() {
         div.style.display = "block";
     }
 }
+
+
+//Ping switch
+function pingAndUpdateStatus(ipAddress) {
+    const switchUrl = `http://${ipAddress}/`;
+    const statusDiv = document.querySelector('.is_available');
+
+    fetch(switchUrl, { method: 'HEAD' })
+        .then(response => {
+            if (response.ok) {
+                statusDiv.style.backgroundColor = 'green';
+            } else {
+                statusDiv.style.backgroundColor = 'red';
+            }
+        })
+        .catch(() => {
+            statusDiv.style.backgroundColor = 'red';
+        });
+}
+
+const link = document.querySelector('a');
+
+link.addEventListener('click', function (event) {
+    event.preventDefault();
+    const ipAddress = this.getAttribute('data-ip-address');
+    pingAndUpdateStatus(ipAddress);
+});
+
+const myDiv = document.querySelector('.is_available');
+myDiv.addEventListener('click', function () {
+    myDiv.classList.toggle('white');
+});

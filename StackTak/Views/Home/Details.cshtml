@@ -1,0 +1,44 @@
+﻿@model StackTak.Models.SearchViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<br/>
+<div class="main_page_output">
+   @* <h3>IP Address:  @Html.DisplayFor(m => m.IPAddress)</h3>
+    <br />
+    <p> Subnet Mask: @Html.DisplayFor(m => m.SubnetMask)</p>
+    <p> Gateway: @Html.DisplayFor(m => m.Gateway)</p>
+    <p> Description: @Html.DisplayFor(m => m.Description)</p>
+    <p> Manufacturer: @Html.DisplayFor(m => m.Manufacturer)</p>
+    <p> Device Model: @Html.DisplayFor(m => m.DeviceModel)</p>
+    <p> Switch  Type: @Html.DisplayFor(m => m.SwitchType)</p>
+    <p> City: @Html.DisplayFor(m => m.City)</p>
+    <p> Street: @Html.DisplayFor(m => m.Street)</p>
+    <p> Building: @Html.DisplayFor(m => m.Building)</p>*@
+
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">IP Address:  @Html.DisplayFor(m => m.IPAddress)</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">Switch  Type: @Html.DisplayFor(m => m.SwitchType)</h6>
+  
+            <p class="card-text"> Subnet Mask: @Html.DisplayFor(m => m.SubnetMask)</p>
+            <p class="card-text"> Gateway: @Html.DisplayFor(m => m.Gateway)</p>
+            <p class="card-text"> Description: @Html.DisplayFor(m => m.Description)</p>
+            <p class="card-text"> Manufacturer: @Html.DisplayFor(m => m.Manufacturer)</p>
+            <p class="card-text"> Device Model: @Html.DisplayFor(m => m.DeviceModel)</p>
+            <p class="card-text"> Switch  Type: @Html.DisplayFor(m => m.SwitchType)</p>
+            <p class="card-text"> City: @Html.DisplayFor(m => m.City)</p>
+            <p class="card-text"> Street: @Html.DisplayFor(m => m.Street)</p>
+            <p class="card-text"> Building: @Html.DisplayFor(m => m.Building)</p>
+            <br/>
+            <a href="#" class="card-link">Edit</a>
+            <a href="#" class="card-link">Delete</a>
+        </div>
+    </div>
+
+
+</div>
