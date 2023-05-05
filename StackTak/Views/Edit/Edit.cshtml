@@ -1,0 +1,88 @@
+﻿@model StackTak.Models.EditViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <div class="create_forms_input">
+            @Html.LabelFor(m => m.IPAddress)
+            @Html.DisplayFor(m => m.IPAddress, new { placeholder = "IP Address" })
+            @Html.ValidationMessageFor(m => m.IPAddress)
+        </div>
+
+        <div class="create_forms_input">
+            @Html.LabelFor(m => m.SubnetMask)
+            @Html.DisplayFor(m => m.SubnetMask, new { placeholder = "Subnet Mask" })
+            @Html.ValidationMessageFor(m => m.SubnetMask)
+        </div>
+
+        <div id="gateway_form" class="create_forms_input">
+            @Html.LabelFor(m => m.Gateway)
+            @Html.DisplayFor(m => m.Gateway, new { @Value = "0", placeholder = "IP Gataway" })
+            @Html.ValidationMessageFor(m => m.Gateway)
+        </div>
+        <div class="create_forms_input">
+            @Html.LabelFor(m => m.SwitchType)
+            @Html.DisplayFor(m => m.SwitchType)
+        </div>
+    </div>
+    <hr />
+    <div class="create_input_block">
+        <div class="input_block_one">
+            <div class="create_forms_input">
+
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.IPAddress)
+                @Html.HiddenFor(m => m.SubnetMask)
+                @Html.HiddenFor(m => m.Gateway)
+                @Html.HiddenFor(m => m.SwitchType)
+
+            </div>
+
+            <div class="create_forms_input">
+                @Html.LabelFor(m => m.Manufacturer)
+                @Html.EditorFor(m => m.Manufacturer, new { placeholder = "Manufacturer" })
+                @Html.ValidationMessageFor(m => m.Manufacturer)
+            </div>
+
+            <div class="create_forms_input">
+                @Html.LabelFor(m => m.DeviceModel)
+                @Html.EditorFor(m => m.DeviceModel, new { placeholder = "Device Model" })
+                @Html.ValidationMessageFor(m => m.DeviceModel)
+            </div>
+
+
+            <div class="create_forms_input">
+                @Html.LabelFor(m => m.City)
+                @Html.EditorFor(m => m.City, new { placeholder = "City" })
+                @Html.ValidationMessageFor(m => m.City)
+            </div>
+        </div>
+
+        <div class="input_block_two">
+            <div class="create_forms_input">
+                @Html.LabelFor(m => m.Street)
+                @Html.EditorFor(m => m.Street, new { placeholder = "Street" })
+                @Html.ValidationMessageFor(m => m.Street)
+            </div>
+
+            <div class="create_forms_input">
+                @Html.LabelFor(m => m.Building)
+                @Html.EditorFor(m => m.Building, new { placeholder = "Building" })
+                @Html.ValidationMessageFor(m => m.Building)
+            </div>
+
+            <div class="create_forms_input">
+                @Html.LabelFor(m => m.Description)
+                @Html.EditorFor(m => m.Description, new { placeholder = "Description" })
+                @Html.ValidationMessageFor(m => m.Description)
+            </div>
+            <br />
+        </div>
+    </div>
+    <button class="create_btn btn btn-primary mt-4" type="submit">Edit</button>
+}

@@ -27,10 +27,7 @@
                         <th>IP Gateway</th>
                     }
                     <th>Switch Type</th>
-                    @*<th>Description</th>
-                    <th>Manufacturer</th>
-                    <th>Model</th>
-                   *@ <th>City</th>
+                    <th>City</th>
                     <th>Street</th>
                     <th>Building</th>
                     <th></th>
@@ -54,26 +51,11 @@
                         <td>@Model.Gateway</td>
                     }
                     <td>@Model.SwitchType</td>
-                    @*<td>@Model.Description</td>
-                    <td>@Model.Manufacturer</td>
-                    <td>@Model.DeviceModel</td>*@
                     <td>@Model.City</td>
                     <td>@Model.Street</td>
                     <td>@Model.Building</td>
-                    <td>@Html.ActionLink("Detail", "Details", "Home", new { ipAddr = @Model.IPAddress },
+                    <td>@Html.ActionLink("Detail", "Details", "Detail", new { ipAddr = @Model.IPAddress },
             new { @class = "viewDialog", data_dialog_title = "View" }) </td>
-
-
-
-
-
-                    @* @if (@Model.SubnetMask != 0)
-        {
-            <td><a href="#" onclick="pingAndUpdateStatus('192.168.0.1')">ping</a></td>
-            <td><div class="is_available"></div></td>
-        }
-                    *@
-
 
 
                 </tr>

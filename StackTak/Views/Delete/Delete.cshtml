@@ -1,0 +1,81 @@
+﻿@model StackTak.Models.EditViewModel
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h4>Are you sure you want to delete ??</h4>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div>
+    <div class="create_forms_input">
+        @Html.LabelFor(m => m.IPAddress)
+        @Html.DisplayFor(m => m.IPAddress)
+        @Html.ValidationMessageFor(m => m.IPAddress)
+    </div>
+
+    <div class="create_forms_input">
+        @Html.LabelFor(m => m.SubnetMask)
+        @Html.DisplayFor(m => m.SubnetMask)
+        @Html.ValidationMessageFor(m => m.SubnetMask)
+    </div>
+
+    <div id="gateway_form" class="create_forms_input">
+        @Html.LabelFor(m => m.Gateway)
+        @Html.DisplayFor(m => m.Gateway)
+        @Html.ValidationMessageFor(m => m.Gateway)
+    </div>
+    <div class="create_forms_input">
+        @Html.LabelFor(m => m.SwitchType)
+        @Html.DisplayFor(m => m.SwitchType)
+    </div>
+
+    <div class="create_forms_input">
+        @Html.LabelFor(m => m.Manufacturer)
+        @Html.DisplayFor(m => m.Manufacturer)
+    </div>
+    <div class="create_forms_input">
+        @Html.LabelFor(m => m.DeviceModel)
+        @Html.DisplayFor(m => m.DeviceModel)
+
+    </div>
+    <div class="create_forms_input">
+        @Html.LabelFor(m => m.City)
+        @Html.DisplayFor(m => m.City)
+    </div>
+    <div class="create_forms_input">
+        @Html.LabelFor(m => m.Street)
+        @Html.DisplayFor(m => m.Street)
+       
+    </div>
+
+    <div class="create_forms_input">
+        @Html.LabelFor(m => m.Building)
+        @Html.DisplayFor(m => m.Building)
+    </div>
+
+    <div class="create_forms_input">
+        @Html.LabelFor(m => m.Description)
+        @Html.DisplayFor(m => m.Description)
+    </div>
+
+</div>
+    <hr />
+    <div class="create_input_block">
+        <div class="input_block_one">
+            <div class="create_forms_input">
+
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.IPAddress)
+                @Html.HiddenFor(m => m.SubnetMask)
+                @Html.HiddenFor(m => m.Gateway)
+                @Html.HiddenFor(m => m.SwitchType)
+
+            </div>
+        </div>
+    </div>
+    <button class="create_btn btn btn-danger mt-4" type="submit">Delete</button>
+}
+

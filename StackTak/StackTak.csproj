@@ -128,6 +128,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CreateController.cs" />
+    <Compile Include="Controllers\DeleteController.cs" />
+    <Compile Include="Controllers\DetailController.cs" />
+    <Compile Include="Controllers\EditController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
@@ -140,6 +143,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Access_Switch.cs" />
     <Compile Include="Models\Aggregation_Switch.cs" />
+    <Compile Include="Models\EditViewModel.cs" />
     <Compile Include="Models\Equipment_Manufacturer.cs" />
     <Compile Include="Models\InventoryDbContext.cs" />
     <Compile Include="Models\Postal_Address.cs" />
@@ -189,7 +193,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Create\Index.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
-    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Detail\Details.cshtml" />
+    <Content Include="Views\Edit\Edit.cshtml" />
+    <Content Include="Views\Delete\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

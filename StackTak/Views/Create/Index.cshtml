@@ -24,58 +24,56 @@
     <div class="create_input_block">
         <div class="input_block_one">
             <div class="create_forms_input">
-                @Html.LabelFor(m => m.DeviceIPAddress)
-                @Html.TextBoxFor(m => m.DeviceIPAddress)
+
+                @Html.TextBoxFor(m => m.DeviceIPAddress , new { placeholder = "IP Address"})
                 @Html.ValidationMessageFor(m => m.DeviceIPAddress)
             </div>
 
             <div class="create_forms_input">
-                @Html.LabelFor(m => m.NetworkMask)
-                @Html.TextBoxFor(m => m.NetworkMask)
+          
+                @Html.TextBoxFor(m => m.NetworkMask, new { placeholder = "Subnet Mask" })
                 @Html.ValidationMessageFor(m => m.NetworkMask)
             </div>
 
             <div id="gateway_form" class="create_forms_input">
-                @Html.LabelFor(m => m.IpGateway)
-                @Html.TextBoxFor(m => m.IpGateway, new { @Value = "0" })
+
+                @Html.TextBoxFor(m => m.IpGateway, new { @Value = "0" , placeholder = "IP Gataway" })
                 @Html.ValidationMessageFor(m => m.IpGateway)
             </div>
 
             <div class="create_forms_input">
-                @Html.LabelFor(m => m.Manufacturer)
-                @Html.TextBoxFor(m => m.Manufacturer)
+
+                @Html.TextBoxFor(m => m.Manufacturer, new { placeholder = "Manufacturer" })
                 @Html.ValidationMessageFor(m => m.Manufacturer)
             </div>
 
             <div class="create_forms_input">
-                @Html.LabelFor(m => m.DeviceModel)
-                @Html.TextBoxFor(m => m.DeviceModel)
+                @Html.TextBoxFor(m => m.DeviceModel, new { placeholder = "Device Model" })
                 @Html.ValidationMessageFor(m => m.DeviceModel)
             </div>
         </div>
 
         <div class="input_block_two">
             <div class="create_forms_input">
-                @Html.LabelFor(m => m.City)
-                @Html.TextBoxFor(m => m.City)
+                @Html.TextBoxFor(m => m.City, new { placeholder = "City" })
                 @Html.ValidationMessageFor(m => m.City)
             </div>
 
             <div class="create_forms_input">
-                @Html.LabelFor(m => m.Street)
-                @Html.TextBoxFor(m => m.Street)
+      
+                @Html.TextBoxFor(m => m.Street, new { placeholder = "Street" })
                 @Html.ValidationMessageFor(m => m.Street)
             </div>
 
             <div class="create_forms_input">
-                @Html.LabelFor(m => m.Building)
-                @Html.TextBoxFor(m => m.Building)
+
+                @Html.TextBoxFor(m => m.Building, new { placeholder = "Building" })
                 @Html.ValidationMessageFor(m => m.Building)
             </div>
 
             <div class="create_forms_input">
-                @Html.LabelFor(m => m.Description)
-                @Html.TextBoxFor(m => m.Description)
+
+                @Html.TextBoxFor(m => m.Description, new { placeholder = "Description" })
                 @Html.ValidationMessageFor(m => m.Description)
             </div>
 

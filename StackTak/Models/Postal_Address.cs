@@ -16,7 +16,7 @@ namespace StackTak.Models
         public string Street { get; set; }
         public string Building { get; set; }
 
-        public List<Access_Switch> Access_Switches { get; set; } = new List<Access_Switch>();
+       // public List<Access_Switch> Access_Switches { get; set; } = new List<Access_Switch>();
 
     }
 }

@@ -3,28 +3,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.NetworkInformation;
 using System.Web;
 using System.Web.Mvc;
 
 namespace StackTak.Controllers
 {
-    public class HomeController : Controller
+    public class DetailController : Controller
     {
         private readonly InventoryDbContext db = new InventoryDbContext();
-
-        public HomeController()
+        public DetailController()
         {
             db = new InventoryDbContext();
         }
-
-        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult Index(string ipAddress)
+        public ActionResult Details(string IPAddr)
         {
             bool isSwitchAccess = false;
             bool isSwitchAggregation = false;
@@ -32,8 +27,8 @@ namespace StackTak.Controllers
             var viewModel = new SearchViewModel();
             try
             {
-                long ipAddressLong = IpAddressToLong(ipAddress);
-                isSwitchAccess =  db.Access_Switches
+                long ipAddressLong = IpAddressToLong(IPAddr);
+                isSwitchAccess = db.Access_Switches
                         .Any(s => s.Device_IP_Address == ipAddressLong);
 
                 isSwitchAggregation = db.Aggregation_Switches
@@ -45,42 +40,46 @@ namespace StackTak.Controllers
                     var aggregationSwitch = db.Aggregation_Switches.FirstOrDefault(s => s.ID.Equals(accessSwitch.IP_Gateway_ID));
                     var manufacturer = db.Equipment_Manufacturers.FirstOrDefault(s => s.Id.Equals(accessSwitch.Manufacturer_ID));
                     var postAddress = db.Postal_Addresses.FirstOrDefault(s => s.Id.Equals(accessSwitch.Postal_Address_ID));
-                
-                        viewModel.IPAddress = ipAddress;
-                        viewModel.SubnetMask = accessSwitch.Network_Mask;
-                        viewModel.Gateway = LongToIpAddress(aggregationSwitch.Device_IP_Address);
-                        //viewModel.Description = accessSwitch.Description;
-                        //viewModel.Manufacturer = manufacturer.Hardware_Manufacturer;
-                        //viewModel.DeviceModel = manufacturer.Hardware_Model;
-                        viewModel.City = postAddress.City;
-                        viewModel.Street = postAddress.Street;
-                        viewModel.Building = postAddress.Building;
-                        viewModel.SwitchType = SwitchTypeEnum.Access;
+
+                    viewModel.IPAddress = IPAddr;
+                    viewModel.SubnetMask = accessSwitch.Network_Mask;
+                    viewModel.Gateway = LongToIpAddress(aggregationSwitch.Device_IP_Address);
+                    viewModel.Description = accessSwitch.Description;
+                    viewModel.Manufacturer = manufacturer.Hardware_Manufacturer;
+                    viewModel.DeviceModel = manufacturer.Hardware_Model;
+                    viewModel.City = postAddress.City;
+                    viewModel.Street = postAddress.Street;
+                    viewModel.Building = postAddress.Building;
+                    viewModel.SwitchType = SwitchTypeEnum.Access;
                 }
                 else if (isSwitchAggregation)
                 {
                     var aggregationSwitch = db.Aggregation_Switches.FirstOrDefault(s => s.Device_IP_Address == ipAddressLong);
                     var manufacturer = db.Equipment_Manufacturers.FirstOrDefault(s => s.Id.Equals(aggregationSwitch.Manufacturer_ID));
                     var postAddress = db.Postal_Addresses.FirstOrDefault(s => s.Id.Equals(aggregationSwitch.Postal_Address_ID));
-                   
-                        viewModel.IPAddress = ipAddress;
-                        viewModel.SubnetMask = aggregationSwitch.Network_Mask;
-                        viewModel.Gateway = "0";
-                        //viewModel.Description = aggregationSwitch.Description;
-                        //viewModel.Manufacturer = manufacturer.Hardware_Manufacturer;
-                        //viewModel.DeviceModel = manufacturer.Hardware_Model;
-                        viewModel.City = postAddress.City;
-                        viewModel.Street = postAddress.Street;
-                        viewModel.Building = postAddress.Building;
-                        viewModel.SwitchType = SwitchTypeEnum.Aggregation;
-                }
 
+                    viewModel.IPAddress = IPAddr;
+                    viewModel.SubnetMask = aggregationSwitch.Network_Mask;
+                    viewModel.Gateway = "0";
+                    viewModel.Description = aggregationSwitch.Description;
+                    viewModel.Manufacturer = manufacturer.Hardware_Manufacturer;
+                    viewModel.DeviceModel = manufacturer.Hardware_Model;
+                    viewModel.City = postAddress.City;
+                    viewModel.Street = postAddress.Street;
+                    viewModel.Building = postAddress.Building;
+                    viewModel.SwitchType = SwitchTypeEnum.Aggregation;
+                }
             }
-            catch {
+            catch
+            {
                 viewModel.IPAddress = "Not found";
             }
             return View(viewModel);
-            
+        }
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
 
         public static long IpAddressToLong(string ipAddress)
@@ -98,13 +97,6 @@ namespace StackTak.Controllers
         {
             IPAddress ipAddress = IPAddress.Parse(ip.ToString());
             return ipAddress.ToString();
-        }
-      
-
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);    
         }
     }
 }

@@ -24,9 +24,6 @@ namespace StackTak.Controllers
         [HttpPost]
         public ActionResult Index(SwitchCreateViewModel switchCreateViewModel)
         {
- 
-         
-            
       
             var newAccessSwitch = new Access_Switch();
             var newAggregationSwitch = new Aggregation_Switch();
@@ -81,7 +78,7 @@ namespace StackTak.Controllers
                     else if (isGatwayExists && !isManufacturerExists && isPostalAddressExists)
                     {
 
-                        newManufacturer.Hardware_Manufacturer = switchCreateViewModel.Manufacturer.ToLower();
+                        newManufacturer.Hardware_Manufacturer = switchCreateViewModel.Manufacturer;
                         newManufacturer.Hardware_Model = switchCreateViewModel.DeviceModel;
 
                         db.Equipment_Manufacturers.Add(newManufacturer);
@@ -104,14 +101,14 @@ namespace StackTak.Controllers
                     // case when the equipment is not in the database, postal address is not in database
                     else if (isGatwayExists && !isManufacturerExists && !isPostalAddressExists)
                     {
-                        newPostalAddress.City = switchCreateViewModel.City.ToLower();
-                        newPostalAddress.Street = switchCreateViewModel.Street.ToLower();
+                        newPostalAddress.City = switchCreateViewModel.City;
+                        newPostalAddress.Street = switchCreateViewModel.Street;
                         newPostalAddress.Building = switchCreateViewModel.Building;
 
                         db.Postal_Addresses.Add(newPostalAddress);
                         db.SaveChanges();
 
-                        newManufacturer.Hardware_Manufacturer = switchCreateViewModel.Manufacturer.ToLower();
+                        newManufacturer.Hardware_Manufacturer = switchCreateViewModel.Manufacturer;
                         newManufacturer.Hardware_Model = switchCreateViewModel.DeviceModel;
 
                         db.Equipment_Manufacturers.Add(newManufacturer);
@@ -132,8 +129,8 @@ namespace StackTak.Controllers
                     // case when the equipment is exists in the database, postal address is not in database
                     else if (isGatwayExists && isManufacturerExists && !isPostalAddressExists)
                     {
-                        newPostalAddress.City = switchCreateViewModel.City.ToLower();
-                        newPostalAddress.Street = switchCreateViewModel.Street.ToLower();
+                        newPostalAddress.City = switchCreateViewModel.City;
+                        newPostalAddress.Street = switchCreateViewModel.Street;
                         newPostalAddress.Building = switchCreateViewModel.Building;
 
                         db.Postal_Addresses.Add(newPostalAddress);
@@ -190,7 +187,7 @@ namespace StackTak.Controllers
                     else if (!isManufacturerExists && isPostalAddressExists)
                     {
 
-                        newManufacturer.Hardware_Manufacturer = switchCreateViewModel.Manufacturer.ToLower();
+                        newManufacturer.Hardware_Manufacturer = switchCreateViewModel.Manufacturer;
                         newManufacturer.Hardware_Model = switchCreateViewModel.DeviceModel;
 
                         db.Equipment_Manufacturers.Add(newManufacturer);
@@ -210,14 +207,14 @@ namespace StackTak.Controllers
                     }
                     else if (!isManufacturerExists && !isPostalAddressExists)
                     {
-                        newPostalAddress.City = switchCreateViewModel.City.ToLower();
-                        newPostalAddress.Street = switchCreateViewModel.Street.ToLower();
+                        newPostalAddress.City = switchCreateViewModel.City;
+                        newPostalAddress.Street = switchCreateViewModel.Street;
                         newPostalAddress.Building = switchCreateViewModel.Building;
 
                         db.Postal_Addresses.Add(newPostalAddress);
                         db.SaveChanges();
 
-                        newManufacturer.Hardware_Manufacturer = switchCreateViewModel.Manufacturer.ToLower();
+                        newManufacturer.Hardware_Manufacturer = switchCreateViewModel.Manufacturer;
                         newManufacturer.Hardware_Model = switchCreateViewModel.DeviceModel;
 
                         db.Equipment_Manufacturers.Add(newManufacturer);
@@ -236,8 +233,8 @@ namespace StackTak.Controllers
                     // case when the equipment is exists in the database, postal address is not in database
                     else if (isManufacturerExists && !isPostalAddressExists)
                     {
-                        newPostalAddress.City = switchCreateViewModel.City.ToLower();
-                        newPostalAddress.Street = switchCreateViewModel.Street.ToLower();
+                        newPostalAddress.City = switchCreateViewModel.City;
+                        newPostalAddress.Street = switchCreateViewModel.Street;
                         newPostalAddress.Building = switchCreateViewModel.Building;
 
                         db.Postal_Addresses.Add(newPostalAddress);
