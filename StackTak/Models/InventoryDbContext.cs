@@ -14,6 +14,7 @@ namespace StackTak.Models
 
         public DbSet<Aggregation_Switch> Aggregation_Switches { get; set; }
         public DbSet<Equipment_Manufacturer> Equipment_Manufacturers { get; set; }
+        public DbSet<User_List> Users { get; set; }
 
     }
 }

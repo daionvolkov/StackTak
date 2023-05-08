@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace StackTak.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly InventoryDbContext db = new InventoryDbContext();
@@ -21,6 +22,8 @@ namespace StackTak.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            string userName = User.Identity.Name;
+            ViewBag.Message = $"Welcome, {userName}!";
             return View();
         }
         [HttpPost]

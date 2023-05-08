@@ -53,7 +53,10 @@ textarea {max-width: 280px}
     margin-top: 10px;
     margin-right: 30px;
 }
-
+.top_menu {
+    display:flex;
+    justify-content: end;
+}
 
 .search_form input {
     margin: 50px 0 30px 0;

@@ -10,6 +10,7 @@ using System.Web.Services.Description;
 
 namespace StackTak.Controllers
 {
+    [Authorize]
     public class CreateController : Controller
     {
         private readonly InventoryDbContext db = new InventoryDbContext();
