@@ -41,6 +41,7 @@
                 <th>City</th>
                 <th>Street</th>
                 <th>Building</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -56,6 +57,10 @@
                     <td>@result.City</td>
                     <td>@result.Street</td>
                     <td>@result.Building</td>
+                    <td>
+                        @Html.ActionLink("Detail", "Details", "Detail", new { ipAddr = result.IPAddress },
+                    new { @class = "viewDialog", data_dialog_title = "View" })
+                </td>
 
                 </tr>
             }

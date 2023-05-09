@@ -8,14 +8,15 @@
 @if (User.Identity.IsAuthenticated)
 {
     <ul class="nav navbar-nav navbar-right welcome_message">
-        <li><a>@User.Identity.Name</a></li>
+        <li>@Html.ActionLink(@User.Identity.Name, "Index", "Account") </li>
+        <!--<li><a>@User.Identity.Name</a></li>-->
         <li>@Html.ActionLink("Log out", "Logout", "User", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
     </ul>
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Log in", "Login", "User")</li>
-        <li>@Html.ActionLink("Register", "Register", "User")</li>
-    </ul>
+<ul class="nav navbar-nav navbar-right">
+    <li>@Html.ActionLink("Log in", "Login", "User")</li>
+    <!-- <li>@Html.ActionLink("Register", "Register", "User")</li>-->
+</ul>
 }
