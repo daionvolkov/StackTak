@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO.Pipes;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -20,7 +21,10 @@ namespace StackTak.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(User_List user)
         {
+            
             var validUser = db.Users.FirstOrDefault(u => u.Login == user.Login && u.Password == user.Password);
+            int accessRights = validUser.AccessRights;
+            Session["AccessRights"] = accessRights;
             if (validUser != null)
             {
                 FormsAuthentication.SetAuthCookie(validUser.Login, false);
@@ -33,6 +37,15 @@ namespace StackTak.Controllers
             }
         }
 
+
+
+
+            [Authorize]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "User");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

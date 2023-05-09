@@ -23,14 +23,17 @@
             <p class="card-text"> Street: @Html.DisplayFor(m => m.Street)</p>
             <p class="card-text"> Building: @Html.DisplayFor(m => m.Building)</p>
             <br />
-            @Html.ActionLink("Edit", "Edit", "Edit", new { ipAddr = @Model.IPAddress },
-            new { @class = "viewDialog", data_dialog_title = "Edit" })
+            
+                
+                @Html.ActionLink("Edit", "Edit", "Edit", new { ipAddr = @Model.IPAddress },
+                new { @class = "viewDialog", data_dialog_title = "Edit" })
 
-            @if (Model.SwitchType == StackTak.Models.SwitchTypeEnum.Access)
-            {
-                @Html.ActionLink("Delete", "Delete", "Delete", new { ipAddr = @Model.IPAddress },
-                new { @class = "viewDialog", data_dialog_title = "Delete" })
-            }
+               @if (Model.SwitchType == StackTak.Models.SwitchTypeEnum.Access)
+                {
+                    @Html.ActionLink("Delete", "Delete", "Delete", new { ipAddr = @Model.IPAddress },
+                    new { @class = "viewDialog", data_dialog_title = "Delete" })
+                }
+            
 
         </div>
     </div>

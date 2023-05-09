@@ -34,8 +34,12 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Address Search", "Index", "Search")</li>
-                    <li>@Html.ActionLink("Add Device", "Index", "Create")</li>
 
+                    @if (Session["AccessRights"] == null || (int)Session["AccessRights"] > 0)
+                    {
+                        <li>@Html.ActionLink("Add Device", "Index", "Create")</li>
+
+                    }
                 </ul>
                 <div class="col-md-3 text-end">
                     <ul>
